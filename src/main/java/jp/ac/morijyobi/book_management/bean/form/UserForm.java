@@ -1,19 +1,17 @@
-package jp.ac.morijyobi.book_management.bean.dto;
+package jp.ac.morijyobi.book_management.bean.form;
 
-public class LoginUserDto {
-    private int id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public class UserForm {
+    @NotBlank
+    @Size(min=5, max=64)
     private String username;
+    @NotBlank
+    @Size(min=6, max=64)
     private String password;
+    @Size(max=255)
     private String name;
-    private String authority;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -37,13 +35,5 @@ public class LoginUserDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
     }
 }

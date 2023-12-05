@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<th:block th:replace="~{layout :: head(Top)}"></th:block>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+
+<main class="container mt-3">
+    <div class="alert alert-info" th:if="${message}" th:text="${message}">message info</div>
+    <h3>タグ登録</h3>
+    <form th:action="@{/tag/register}" th:object="${tagForm}" method="post">
+        <div class="mb-3">
+            <label for="tag-name" class="form-label">タグ名</label>
+            <input type="text" class="form-control" id="tag-name" name="tagName" th:field="*{tagName}" required minlength="1" maxlength="32">
+            <div th:errors="*{tagName}" class="alert alert-danger p-2">error message</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">登録</button>
+    </form>
+    <h3 style="margin-top: 0.5rem">タグ一覧</h3>
+    <div class="mx-auto">
+        <table class="table table-striped">
+            <colgroup>
+                <col style="width: 20%">
+                <col style="width: 80%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>タグ名</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tag : ${tagList}">
+                <td><span th:text="${tag.id}">0</span></td>
+                <td><span th:text="${tag.tagName}">tag name</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<th:block th:replace="~{layout :: footer}"></th:block>
+<th:block th:replace="~{layout :: script}"></th:block>
+</body>
+</html>

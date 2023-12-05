@@ -16,22 +16,25 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/").permitAll()// /というURLは全てのユーザーに許可する
-                        .requestMatchers("/common/**").permitAll() //common配下のURLはログイン不要
-                        .anyRequest().authenticated()// それ以外のURLは認証が必要
+                        .requestMatchers("/").permitAll()   // /という URLはログイン無しでアクセスOK
+                        .requestMatchers("/common/**").permitAll() // /common配下のURLはログイン無しでアクセスOK
+                        .requestMatchers("/book/list").permitAll()  // /book/listという URLはログイン無しでアクセスOK
+                        .requestMatchers("/book/**").hasRole("ADMIN") // /book配下のURLはADMIN権限が必要
+                        .requestMatchers("/tag/**").hasRole("ADMIN") // /tag配下のURLはADMIN権限が必要
+                        .anyRequest().authenticated()       // それ以外のURLはログインが必要
                 ).formLogin(login -> login
-                        .loginProcessingUrl("/login")// ユーザーID・パスワードの送信先URL（POST)
-                        .loginPage("/login")// ログイン画面のURL（GET）
-                        .defaultSuccessUrl("/") // ログイン成功時のリダイレクト先URL
-                        .failureUrl("/login?error")// ログイン失敗時のリダイレクト先URL
-                        .permitAll()  // ログイン画面は全てのユーザーに許可する
+                        .loginProcessingUrl("/login")       // ユーザID・PWの送信先URL(POST)
+                        .loginPage("/login")                // ログイン画面のURL(GET)
+                        .defaultSuccessUrl("/")             // ログイン成功時のリダイレクト先URL
+                        .failureUrl("/login?error")     // ログイン失敗時のリダイレクト先URL
+                        .permitAll()                        // ログイン画面のアクセス権限の設定(すべて許可)
                 );
+
         return http.build();
     }
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
-
-

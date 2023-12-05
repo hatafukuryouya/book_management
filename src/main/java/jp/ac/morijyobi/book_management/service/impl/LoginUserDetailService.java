@@ -1,4 +1,4 @@
-package jp.ac.morijyobi.book_management.service.serviceImpl;
+package jp.ac.morijyobi.book_management.service.impl;
 
 import jp.ac.morijyobi.book_management.bean.dto.LoginUserDto;
 import jp.ac.morijyobi.book_management.mapper.UsersMapper;

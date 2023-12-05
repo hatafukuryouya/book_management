@@ -1,11 +1,11 @@
-package jp.ac.morijyobi.book_management.bean.dto;
+package jp.ac.morijyobi.book_management.bean.entity;
 
-public class LoginUserDto {
+public class User {
     private int id;
     private String username;
     private String password;
     private String name;
-    private String authority;
+    private int authorityId;
 
     public int getId() {
         return id;
@@ -39,11 +39,11 @@ public class LoginUserDto {
         this.name = name;
     }
 
-    public String getAuthority() {
-        return authority;
+    public int getAuthorityId() {
+        return authorityId;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setAuthorityId(int authorityId) {
+        this.authorityId = authorityId;
     }
 }

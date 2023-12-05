@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
-<th:block th:replace="~{layout :: head(ユーザー登録)}"></th:block>
+<th:block th:replace="~{layout :: head(図書登録)}"></th:block>
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
 <main class="container mt-3">
-    <h3>ユーザー登録</h3>
-    <p>TODO:form後で作る</p>
+    <h3>ユーザ登録</h3>
+    <form th:action="@{/common/register-exe}" method="post" th:object="${userForm}">
+        <div class="mb-3">
+            <label class="form-label" for="username">ユーザ名</label>
+            <input class="form-control" type="text" id="username" name="username" th:field="*{username}" required minlength="5" maxlength="64">
+            <div th:errors="*{username}" class="alert alert-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="password">パスワード</label>
+            <input class="form-control" type="password" id="password" name="password" th:field="*{password}" required minlength="6" maxlength="64">
+            <div th:errors="*{password}" class="alert alert-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="name">氏名</label>
+            <input class="form-control" type="text" id="name" name="name" th:field="*{name}" maxlength="255">
+            <div th:errors="*{name}" class="alert alert-danger"></div>
+        </div>
+        <button class="btn btn-primary" type="submit">登録</button>
+    </form>
 </main>
 
 <th:block th:replace="~{layout :: footer}"></th:block>
-
 <th:block th:replace="~{layout :: script}"></th:block>
 </body>
 </html>

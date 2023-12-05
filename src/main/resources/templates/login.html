@@ -4,10 +4,13 @@
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
 <main class="container mt-3">
-    <h3>ログイン</h3>
     <div class="alert alert-danger" th:if="${param.error}">
-        ユーザー名、またはパスワードが違います
+        ユーザ名、またはパスワードが違います
     </div>
+    <div class="alert alert-info" th:if="${message}" th:text="${message}">
+        dummy message
+    </div>
+    <h3>ログイン</h3>
     <form th:action="@{/login}" method="post">
         <p>ID:<input class="form-control" type="text" name="username"></p>
         <p>パスワード:<input class="form-control" type="password" name="password"></p>

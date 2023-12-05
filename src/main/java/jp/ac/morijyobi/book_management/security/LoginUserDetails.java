@@ -11,13 +11,13 @@ public class LoginUserDetails implements UserDetails {
 
     private final LoginUserDto user;
 
-    public LoginUserDetails(LoginUserDto user){
+    public LoginUserDetails(LoginUserDto user) {
         this.user = user;
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities(){
-    return AuthorityUtils.createAuthorityList("ROLE_"+user.getAuthority());
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.createAuthorityList("ROLE_" + user.getAuthority());
     }
 
     @Override
@@ -27,7 +27,7 @@ public class LoginUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getName();
+        return user.getUsername();
     }
 
     @Override

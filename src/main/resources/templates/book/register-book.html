@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
 <th:block th:replace="~{layout :: head(図書登録)}"></th:block>
+<style>
+    button.btn-primary {
+        margin-bottom: 60px;
+    }
+</style>
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
+
 <main class="container mt-3">
+
     <div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
     <h3>図書登録</h3>
     <form th:action="@{/book/register}" method="post" th:object="${bookForm}">

@@ -16,7 +16,8 @@ public interface UsersMapper {
             "WHERE u.username = #{username}")
     LoginUserDto selectUserByUsername(String username);
 
-    @Insert("INSERT INTO bookusers VALUES (default, #{username}, #{password}," + " #{name}, #{authorityId})")
+    @Insert("INSERT INTO bookusers VALUES (default, #{username}, #{password}," +
+            " #{name}, #{authorityId})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(User user);
 }

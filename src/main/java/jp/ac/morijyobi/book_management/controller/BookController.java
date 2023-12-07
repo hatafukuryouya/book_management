@@ -5,6 +5,8 @@ import jp.ac.morijyobi.book_management.bean.entity.Tag;
 import jp.ac.morijyobi.book_management.bean.form.BookForm;
 import jp.ac.morijyobi.book_management.service.BookService;
 import jp.ac.morijyobi.book_management.service.TagService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,12 +60,38 @@ public class BookController {
 
         return "redirect:/book/register";
     }
-    @GetMapping("/list")
-    public String bookList(@RequestParam(defaultValue = "") String keyword, Model model) {
-        List<Book> bookFormList = bookService.getBooksByKeyword(keyword);
-        model.addAttribute("bookList", bookFormList);
 
+    @GetMapping("/list")
+    public String bookList(@RequestParam(defaultValue = "") String keyword,
+                           Model model) {
+        List<Book> bookList = bookService.getBooksByKeyword(keyword);
+        model.addAttribute("bookList", bookList);
 
         return "book/book-list";
     }
+
+    @GetMapping("/loan")
+    public String bookLoan(@RequestParam int bookId,
+                           Model model) {
+        Book book = bookService.getBookById(bookId);
+        model.addAttribute("book", book);
+
+        return "book/book-loan";
+    }
+
+    @PostMapping("/loan")
+    public String bookLoanExe(@RequestParam int id,
+                              @AuthenticationPrincipal UserDetails userDetails,
+                              RedirectAttributes redirectAttributes,
+                              Model model) {
+
+        if (bookService.registerBookLoan(id, userDetails.getUsername())) {
+            redirectAttributes.addFlashAttribute("message", "貸出が完了しました。");
+        } else {
+            redirectAttributes.addFlashAttribute("warning", "貸出に失敗しました。");
+        }
+        return "redirect:/book/list";
+    }
+
+
 }

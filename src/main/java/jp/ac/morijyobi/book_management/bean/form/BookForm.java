@@ -9,15 +9,16 @@ import java.util.List;
 
 public class BookForm {
     @NotBlank
-    @Size(min=1,max=255)
+    @Size(min= 1, max= 255)
     private String title;
-    @Size(max=255)
+    @Size(max= 255)
     private String author;
+    @Size(max= 255)
     private String publisher;
     @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
-    @NotEmpty(message = "タグを一つ以上選択してください")
+    @NotEmpty(message = "1つ以上選択してください")
     private List<@NotNull Integer> tagIdList;
 
     public String getTitle() {
@@ -59,6 +60,4 @@ public class BookForm {
     public void setTagIdList(List<Integer> tagIdList) {
         this.tagIdList = tagIdList;
     }
-
-
 }

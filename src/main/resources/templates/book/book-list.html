@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:replace="~{layout :: head(Top)}"></th:block>
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
+
 <main class="container mt-3">
+    <div class="alert alert-info" th:if="${message}" th:text="${message}">info message</div>
+    <div class="alert alert-danger" th:if="${warning}" th:text="${warning}">warning message</div>
     <h3>図書検索</h3>
     <form th:action="@{/book/list}" action="get">
         <div class="mb-3">
@@ -18,9 +21,10 @@
             <colgroup>
                 <col style="width: 5%">
                 <col style="width: 40%">
-                <col style="width: 20%">
-                <col style="width: 20%">
                 <col style="width: 15%">
+                <col style="width: 15%">
+                <col style="width: 15%">
+                <col style="width: 10%">
             </colgroup>
             <thead>
             <tr>
@@ -29,6 +33,7 @@
                 <th>著者</th>
                 <th>出版社</th>
                 <th>出版日</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -37,9 +42,17 @@
                 <td><span th:text="${book.title}">book title</span></td>
                 <td><span th:text="${book.author}">book author</span></td>
                 <td><span th:text="${book.publisher}">book publisher</span></td>
-                <td><span th:text="${book.publication_date}">book publicationDate</span></td>
+                <td><span th:text="${book.publicationDate}">book publicationDate</span></td>
+                <td>
+                    <a th:href="@{/book/loan(bookId=${book.id})}" sec:authorize="hasRole('GENERAL')" class="btn btn-primary float-end">貸出</a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </main>
+
+<th:block th:replace="~{layout :: footer}"></th:block>
+<th:block th:replace="~{layout :: script}"></th:block>
+</body>
+</html>

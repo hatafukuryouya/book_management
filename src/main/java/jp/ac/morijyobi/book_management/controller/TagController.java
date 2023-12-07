@@ -28,8 +28,10 @@ public class TagController {
     public String register(Model model) {
         TagForm tagForm = new TagForm();
         model.addAttribute("tagForm", tagForm);
+
         List<Tag> tagList = tagService.getAllTags();
-        model.addAttribute("tagList",tagList);
+        model.addAttribute("tagList", tagList);
+
         return "tag/register-tag";
     }
 

@@ -8,16 +8,7 @@ public class Book {
     private String title;
     private String author;
     private String publisher;
-
-    public LocalDate getPublication_date() {
-        return publication_date;
-    }
-
-    public void setPublication_date(LocalDate publication_date) {
-        this.publication_date = publication_date;
-    }
-
-    private LocalDate publication_date;
+    private LocalDate publicationDate;
 
     public int getId() {
         return id;
@@ -51,5 +42,11 @@ public class Book {
         this.publisher = publisher;
     }
 
+    public LocalDate getPublicationDate() {
+        return publicationDate;
+    }
 
+    public void setPublicationDate(LocalDate publicationDate) {
+        this.publicationDate = publicationDate;
+    }
 }

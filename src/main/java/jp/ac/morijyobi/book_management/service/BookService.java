@@ -8,6 +8,10 @@ import java.util.List;
 public interface BookService {
 
     void registerBook(BookForm bookForm);
+
     List<Book> getBooksByKeyword(String keyword);
 
-    }
+    Book getBookById(int bookId);
+
+    boolean registerBookLoan(int bookId, String username);
+}

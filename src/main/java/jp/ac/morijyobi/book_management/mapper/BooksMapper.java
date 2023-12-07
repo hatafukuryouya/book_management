@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface BooksMapper {
+
     @Insert("INSERT INTO books VALUES (default, #{title}, #{author}, #{publisher}, #{publicationDate})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertBook(Book book);
@@ -19,4 +20,6 @@ public interface BooksMapper {
             "ORDER BY publication_date DESC")
     List<Book> selectBooksByKeyword(String keyword);
 
+    @Select("SELECT id, title, author, publisher, publication_date FROM books WHERE id = #{bookId}")
+    Book selectBookById(int bookId);
 }
